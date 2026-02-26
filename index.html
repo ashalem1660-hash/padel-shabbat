@@ -4,30 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🏓 Padel Shabbat - המלחמה מתחילה</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --primary: #ff6b35;
-            --secondary: #004e89;
-            --dark: #1a1a2e;
-            --darker: #16213e;
-            --accent: #f7c948;
-            --danger: #e63946;
-            --success: #2ec4b6;
-            --glass: rgba(255,255,255,0.05);
+            --primary: #ff6b35; --secondary: #004e89; --dark: #1a1a2e;
+            --darker: #16213e; --accent: #f7c948; --danger: #e63946;
+            --success: #2ec4b6; --glass: rgba(255,255,255,0.05);
             --glass-border: rgba(255,255,255,0.1);
         }
-
-        body {
-            font-family: 'Heebo', sans-serif;
-            background: var(--dark);
-            color: #fff;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Heebo', sans-serif; background: var(--dark); color: #fff; overflow-x: hidden; }
 
         .bg-animation {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
@@ -42,6 +28,7 @@
         }
         @keyframes bgMove { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-2%,-2%); } }
 
+        /* Hero */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center; padding: 20px;
@@ -53,7 +40,6 @@
             margin-bottom: 20px; animation: pulse 2s ease-in-out infinite;
         }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,107,53,0.4); } }
-
         .hero h1 {
             font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
             background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--primary) 100%);
@@ -62,6 +48,7 @@
         }
         .hero-subtitle { font-size: clamp(1.2rem, 3vw, 1.8rem); color: rgba(255,255,255,0.7); margin-bottom: 40px; font-weight: 300; }
 
+        /* Countdown */
         .countdown-container { margin: 30px 0; }
         .countdown-label { font-size: 18px; color: var(--accent); font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 3px; }
         .countdown { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
@@ -80,6 +67,7 @@
         .countdown-item .label { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
         .countdown-done { font-size: 2.5rem; font-weight: 900; color: var(--accent); animation: pulse 1s ease-in-out infinite; }
 
+        /* Location */
         .location-bar { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
         .location-bar a {
             display: inline-flex; align-items: center; gap: 8px;
@@ -90,11 +78,13 @@
         .btn-google { background: linear-gradient(135deg, #34a853, #0d8043); color: #fff; }
         .btn-waze:hover, .btn-google:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
+        /* Sections */
         .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: rgba(255,255,255,0.5); font-size: 16px; margin-bottom: 40px; }
         .divider { width: 80px; height: 4px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 2px; margin: 0 auto 30px; }
 
+        /* Teams */
         .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         .team-card {
             background: var(--glass); border: 1px solid var(--glass-border);
@@ -126,17 +116,48 @@
         .team-stat .stat-value { font-size: 1.3rem; font-weight: 900; color: var(--accent); }
         .team-stat .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
 
-        .matches-container { display: flex; flex-direction: column; gap: 15px; max-width: 700px; margin: 0 auto; }
-        .match-card {
+        /* Voting Section */
+        .voting-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
+        .vote-card {
             background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: 16px; padding: 20px; display: flex; align-items: center;
-            justify-content: space-between; transition: all 0.3s;
+            border-radius: 20px; padding: 25px; transition: all 0.3s;
         }
-        .match-card:hover { border-color: var(--accent); }
-        .match-team { flex: 1; text-align: center; font-weight: 700; font-size: 1.1rem; }
-        .match-vs { font-size: 1.5rem; font-weight: 900; color: var(--danger); padding: 0 20px; text-shadow: 0 0 20px rgba(230,57,70,0.5); }
-        .match-number { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 5px; }
+        .vote-card:hover { border-color: var(--accent); }
+        .vote-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+        .vote-card-emoji { font-size: 2.5rem; }
+        .vote-card-title { font-size: 1.2rem; font-weight: 900; }
+        .vote-card-desc { font-size: 13px; color: rgba(255,255,255,0.4); }
 
+        .vote-options { display: flex; flex-direction: column; gap: 8px; }
+        .vote-option {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; border-radius: 12px; cursor: pointer;
+            background: rgba(0,0,0,0.2); border: 1px solid transparent;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .vote-option:hover { border-color: var(--primary); background: rgba(255,107,53,0.08); }
+        .vote-option.voted { border-color: var(--accent); background: rgba(247,201,72,0.1); }
+        .vote-option-name { font-weight: 700; font-size: 14px; flex: 1; z-index: 1; }
+        .vote-option-count {
+            background: rgba(255,255,255,0.1); padding: 3px 10px;
+            border-radius: 50px; font-size: 13px; font-weight: 700; z-index: 1;
+            min-width: 35px; text-align: center;
+        }
+        .vote-bar {
+            position: absolute; top: 0; right: 0; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,53,0.15));
+            border-radius: 12px; transition: width 0.5s ease;
+        }
+        .vote-total { text-align: center; margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.3); }
+        .voter-name-input {
+            width: 100%; padding: 12px 16px; border-radius: 12px;
+            border: 1px solid var(--glass-border); background: var(--darker);
+            color: #fff; font-family: 'Heebo'; font-size: 14px;
+            margin-bottom: 20px; text-align: center;
+        }
+        .voter-name-input:focus { outline: none; border-color: var(--primary); }
+
+        /* Videos */
         .video-section { margin-top: 30px; }
         .video-upload-area {
             background: var(--glass); border: 2px dashed var(--glass-border);
@@ -149,7 +170,7 @@
         .video-select { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
         .video-select select, .video-select input {
             padding: 10px 20px; border-radius: 10px; border: 1px solid var(--glass-border);
-            background: var(--darker); color: #fff; font-family: 'Heebo', sans-serif; font-size: 14px;
+            background: var(--darker); color: #fff; font-family: 'Heebo'; font-size: 14px;
         }
         .videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
         .video-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; }
@@ -157,7 +178,10 @@
         .video-card-info { padding: 15px; }
         .video-card-info .v-team { font-weight: 700; color: var(--accent); }
         .video-card-info .v-date { font-size: 12px; color: rgba(255,255,255,0.4); }
+        .upload-progress { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 10px; overflow: hidden; display: none; }
+        .upload-progress-bar { height: 100%; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 3px; transition: width 0.3s; width: 0%; }
 
+        /* Trash Talk */
         .trashtalk-section {
             background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(255,107,53,0.05));
             border: 1px solid rgba(230,57,70,0.2); border-radius: 24px; padding: 40px; margin-top: 20px;
@@ -165,20 +189,18 @@
         .trashtalk-form { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto 30px; }
         .trashtalk-form input, .trashtalk-form textarea, .trashtalk-form select {
             padding: 14px 18px; border-radius: 12px; border: 1px solid var(--glass-border);
-            background: var(--darker); color: #fff; font-family: 'Heebo', sans-serif;
-            font-size: 15px; transition: border-color 0.3s;
+            background: var(--darker); color: #fff; font-family: 'Heebo'; font-size: 15px; transition: border-color 0.3s;
         }
         .trashtalk-form input:focus, .trashtalk-form textarea:focus { outline: none; border-color: var(--primary); }
         .trashtalk-form textarea { min-height: 80px; resize: vertical; }
         .trashtalk-form button {
             padding: 14px; border: none; border-radius: 12px;
             background: linear-gradient(135deg, var(--danger), var(--primary));
-            color: #fff; font-family: 'Heebo', sans-serif; font-size: 16px;
+            color: #fff; font-family: 'Heebo'; font-size: 16px;
             font-weight: 700; cursor: pointer; transition: all 0.3s;
         }
         .trashtalk-form button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(230,57,70,0.3); }
         .trashtalk-form button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
         .trashtalk-feed { max-height: 500px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
         .trashtalk-feed::-webkit-scrollbar { width: 6px; }
         .trashtalk-feed::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
@@ -193,6 +215,7 @@
         .trashtalk-text { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.6; }
         .trashtalk-target { font-size: 12px; color: var(--primary); margin-top: 5px; }
 
+        /* Predictions */
         .fun-predictions { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .prediction-card {
             background: var(--glass); border: 1px solid var(--glass-border);
@@ -203,9 +226,9 @@
         .prediction-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
         .prediction-desc { color: rgba(255,255,255,0.5); font-size: 14px; }
 
+        /* Misc */
         .footer { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.3); font-size: 14px; border-top: 1px solid var(--glass-border); margin-top: 40px; }
         .footer .emoji-row { font-size: 2rem; margin-bottom: 10px; }
-
         .scroll-top {
             position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px;
             border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--danger));
@@ -215,7 +238,6 @@
         }
         .scroll-top:hover { transform: translateY(-3px); }
         .scroll-top.visible { display: flex; }
-
         .nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
             padding: 15px 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
@@ -229,46 +251,31 @@
             font-weight: 700; padding: 6px 14px; border-radius: 50px; transition: all 0.3s;
         }
         .nav a:hover { color: #fff; background: rgba(255,255,255,0.1); }
-
         .empty-state { text-align: center; padding: 40px; color: rgba(255,255,255,0.3); }
         .empty-state .empty-emoji { font-size: 3rem; margin-bottom: 10px; }
-
         .toast {
-            position: fixed; bottom: 30px; right: 30px;
-            background: var(--success); color: #fff; padding: 14px 24px;
-            border-radius: 12px; font-weight: 700; font-size: 14px; z-index: 200;
-            transform: translateY(100px); opacity: 0; transition: all 0.3s;
+            position: fixed; bottom: 30px; right: 30px; background: var(--success);
+            color: #fff; padding: 14px 24px; border-radius: 12px; font-weight: 700;
+            font-size: 14px; z-index: 200; transform: translateY(100px); opacity: 0; transition: all 0.3s;
         }
         .toast.show { transform: translateY(0); opacity: 1; }
-
         .loading-spinner {
             display: inline-block; width: 20px; height: 20px;
             border: 3px solid rgba(255,255,255,0.3); border-radius: 50%;
             border-top-color: #fff; animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        .upload-progress {
-            width: 100%; height: 6px; background: rgba(255,255,255,0.1);
-            border-radius: 3px; margin-top: 10px; overflow: hidden; display: none;
-        }
-        .upload-progress-bar {
-            height: 100%; background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 3px; transition: width 0.3s; width: 0%;
-        }
-
         .realtime-dot {
             width: 8px; height: 8px; background: var(--success);
             border-radius: 50%; display: inline-block; margin-left: 5px;
             animation: blink 2s ease-in-out infinite;
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
         @media (max-width: 600px) {
             .countdown-item { min-width: 70px; padding: 15px; }
             .countdown-item .number { font-size: 2rem; }
             .trashtalk-section { padding: 25px 15px; }
-            .teams-grid { grid-template-columns: 1fr; }
+            .teams-grid, .voting-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -278,34 +285,32 @@
 
 <nav class="nav" id="navbar">
     <a href="#hero">🏠 בית</a>
-    <a href="#teams">👥 הזוגות</a>
-    <a href="#matches">📋 משחקים</a>
+    <a href="#teams">👥 זוגות</a>
+    <a href="#voting">🗳️ הצבעות</a>
     <a href="#videos">🎬 סרטונים</a>
     <a href="#trashtalk">🔥 טראש טוק</a>
-    <a href="#predictions">🏆 תחזיות</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="hero">
     <div class="hero-badge">🔥 שבת קרבות 🔥</div>
     <h1>PADEL<br>SHABBAT</h1>
     <p class="hero-subtitle">5 זוגות. מגרש אחד. אפס רחמים.</p>
-
     <div class="countdown-container">
         <div class="countdown-label">⏱️ הספירה לאחור למלחמה</div>
         <div class="countdown" id="countdown"></div>
     </div>
-
     <div style="margin-top:15px; color: rgba(255,255,255,0.5);">
         📍 שיטרית 2, תל אביב &nbsp;|&nbsp; 🕛 שבת, 12:00
-        <span class="realtime-dot" title="מחובר לשרת"></span>
+        <span class="realtime-dot" title="מחובר"></span>
     </div>
-
     <div class="location-bar">
         <a href="https://waze.com/ul?q=שיטרית 2 תל אביב&navigate=yes" target="_blank" class="btn-waze">🧭 Waze</a>
         <a href="https://www.google.com/maps/search/שיטרית+2+תל+אביב" target="_blank" class="btn-google">📍 Google Maps</a>
     </div>
 </section>
 
+<!-- TEAMS -->
 <section class="section" id="teams">
     <h2 class="section-title">🎯 הזוגות</h2>
     <p class="section-subtitle">הכירו את הלוחמים - כל זוג והסיפור שלו</p>
@@ -340,7 +345,7 @@
                 <div class="team-number">3</div>
                 <div><div class="team-names">סם ועמית</div><span class="team-tag tag-danger">⚠️ מועמדים לירידה</span></div>
             </div>
-            <div class="team-description">מועמדים לירידת ליגה ובגדול. סם, שמכר את שלם שבת קודמת, מנסה למצוא גאולה עם עמית. השאלה היא - האם עמית יצליח לסחוב את הצוות הזה, או שזו תהיה עוד שבת של בושות?</div>
+            <div class="team-description">מועמדים לירידת ליגה ובגדול. סם, שמכר את שלם שבת קודמת, מנסה למצוא גאולה עם עמית. השאלה היא - האם עמית יצליח לסחוב, או שזו תהיה עוד שבת של בושות?</div>
             <div class="team-stats">
                 <div class="team-stat"><div class="stat-value">📉</div><div class="stat-label">פורמה</div></div>
                 <div class="team-stat"><div class="stat-value">🤡</div><div class="stat-label">אמינות</div></div>
@@ -374,13 +379,22 @@
     </div>
 </section>
 
-<section class="section" id="matches">
-    <h2 class="section-title">📋 לוח משחקים</h2>
-    <p class="section-subtitle">כולם נגד כולם - אין מקום להתחבא</p>
+<!-- VOTING -->
+<section class="section" id="voting">
+    <h2 class="section-title">🗳️ הצבעות להנהלה <span class="realtime-dot"></span></h2>
+    <p class="section-subtitle">העם בוחר! הצביעו ותראו תוצאות בזמן אמת</p>
     <div class="divider"></div>
-    <div class="matches-container" id="matchesContainer"></div>
+
+    <div style="max-width:400px; margin: 0 auto 30px;">
+        <input type="text" class="voter-name-input" id="voterName" placeholder="🏷️ הכניסו את השם שלכם להצבעה">
+    </div>
+
+    <div class="voting-grid" id="votingGrid">
+        <!-- Generated by JS -->
+    </div>
 </section>
 
+<!-- VIDEOS -->
 <section class="section" id="videos">
     <h2 class="section-title">🎬 חדר הסרטונים</h2>
     <p class="section-subtitle">העלו הוכחות - גולים, פדיחות, וכל מה שביניהם</p>
@@ -397,7 +411,7 @@
             </select>
             <input type="text" id="videoDescription" placeholder="תיאור קצר..." style="width:200px;">
         </div>
-        <div class="video-upload-area" id="videoUploadArea" onclick="document.getElementById('videoInput').click()">
+        <div class="video-upload-area" onclick="document.getElementById('videoInput').click()">
             <div class="upload-icon">🎥</div>
             <p><strong>לחצו להעלאת סרטון</strong></p>
             <p style="font-size:12px; margin-top:5px;">MP4, MOV, WebM (עד 50MB)</p>
@@ -412,8 +426,9 @@
     </div>
 </section>
 
+<!-- TRASH TALK -->
 <section class="section" id="trashtalk">
-    <h2 class="section-title">🗣️ טראש טוק <span class="realtime-dot" title="עדכון בזמן אמת"></span></h2>
+    <h2 class="section-title">🗣️ טראש טוק <span class="realtime-dot"></span></h2>
     <p class="section-subtitle">פה זה המקום להראות מי באמת אלוף - במילים</p>
     <div class="divider"></div>
     <div class="trashtalk-section">
@@ -431,25 +446,12 @@
             <button id="ttSubmitBtn" onclick="postTrashTalk()">💣 שגר טראש טוק</button>
         </div>
         <div class="trashtalk-feed" id="trashtalkFeed">
-            <div class="empty-state"><div class="empty-emoji">💬</div><p>טוען הודעות...</p></div>
+            <div class="empty-state"><div class="empty-emoji">💬</div><p>טוען...</p></div>
         </div>
     </div>
 </section>
 
-<section class="section" id="predictions">
-    <h2 class="section-title">🏆 תחזיות ופרסים</h2>
-    <p class="section-subtitle">כי לצחוק זה חלק מהמשחק</p>
-    <div class="divider"></div>
-    <div class="fun-predictions">
-        <div class="prediction-card"><div class="prediction-emoji">🏆</div><div class="prediction-title">מועמדים לתואר</div><div class="prediction-desc">אורחי ושלם - הרותחים</div></div>
-        <div class="prediction-card"><div class="prediction-emoji">😤</div><div class="prediction-title">הכי יתלונן</div><div class="prediction-desc">עידו ויוגב - ברור לכולם</div></div>
-        <div class="prediction-card"><div class="prediction-emoji">🤡</div><div class="prediction-title">הפאדיחה של היום</div><div class="prediction-desc">סם - אחרי שמכר את שלם, הכל אפשרי</div></div>
-        <div class="prediction-card"><div class="prediction-emoji">💥</div><div class="prediction-title">הכי ייקרע</div><div class="prediction-desc">נחום - הלחץ ממחנה האימונים</div></div>
-        <div class="prediction-card"><div class="prediction-emoji">🐴</div><div class="prediction-title">סוס שחור</div><div class="prediction-desc">דניאל וניר - שקטים אבל קטלניים</div></div>
-        <div class="prediction-card"><div class="prediction-emoji">📉</div><div class="prediction-title">ירידת ליגה</div><div class="prediction-desc">סם ועמית - מישהו צריך לרדת</div></div>
-    </div>
-</section>
-
+<!-- FOOTER -->
 <footer class="footer">
     <div class="emoji-row">🏓🔥⚡🏆🎯</div>
     <p>Padel Shabbat © 2025 | נבנה עם אהבה, זיעה ואגו מנופח</p>
@@ -460,387 +462,308 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // =============================================
-    // 🔧 SUPABASE CONFIG - PUT YOUR KEYS HERE!
-    // =============================================
-    const SUPABASE_URL = https://rrzhtfnztsrdisxdkyoe.supabase.co;
-    const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJyemh0Zm56dHNyZGlzeGRreW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMDQwNzgsImV4cCI6MjA4NzY4MDA3OH0.edWdN6NubhswbtHBCm7Rpk4wc19fwxrrPtZVH3Mdhi4;
+// =============================================
+// 🔧 SUPABASE CONFIG
+// =============================================
+const SUPABASE_URL = https://rrzhtfnztsrdisxdkyoe.supabase.co;
+const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJyemh0Zm56dHNyZGlzeGRreW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMDQwNzgsImV4cCI6MjA4NzY4MDA3OH0.edWdN6NubhswbtHBCm7Rpk4wc19fwxrrPtZVH3Mdhi4;
 
-    // Simple Supabase client (no SDK needed!)
-    const supabase = {
-        headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-        },
+const supabaseHeaders = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+};
 
-        async from(table) {
-            const self = this;
-            return {
-                async select(columns = '*') {
-                    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?select=${columns}&order=created_at.desc`, {
-                        headers: self.headers
-                    });
-                    return { data: await res.json(), error: res.ok ? null : 'Error fetching' };
-                },
-                async insert(data) {
-                    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
-                        method: 'POST',
-                        headers: self.headers,
-                        body: JSON.stringify(data)
-                    });
-                    return { data: await res.json(), error: res.ok ? null : 'Error inserting' };
-                }
-            };
-        },
+// Simple fetch helpers
+async function dbSelect(table) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?select=*&order=created_at.desc`, { headers: supabaseHeaders });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+}
 
-        storage: {
-            from(bucket) {
-                return {
-                    async upload(path, file) {
-                        const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${bucket}/${path}`, {
-                            method: 'POST',
-                            headers: {
-                                'apikey': SUPABASE_KEY,
-                                'Authorization': `Bearer ${SUPABASE_KEY}`,
-                                'Content-Type': file.type,
-                                'x-upsert': 'true'
-                            },
-                            body: file
-                        });
-                        return { data: res.ok ? { path } : null, error: res.ok ? null : 'Upload error' };
-                    },
-                    getPublicUrl(path) {
-                        return { data: { publicUrl: `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}` } };
-                    }
-                };
-            }
-        },
+async function dbInsert(table, data) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+        method: 'POST', headers: supabaseHeaders, body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+}
 
-        // Real-time polling (simple alternative to WebSocket)
-        channel(name) {
-            return {
-                callbacks: [],
-                on(event, config, callback) {
-                    this.callbacks.push({ table: config.table, callback });
-                    return this;
-                },
-                subscribe() {
-                    this.callbacks.forEach(({ table, callback }) => {
-                        setInterval(async () => {
-                            const client = await supabase.from(table);
-                            const { data } = await client.select();
-                            if (data) callback({ new: data[0] });
-                        }, 10000); // Poll every 10 seconds
-                    });
-                }
-            };
-        }
-    };
+async function storageUpload(bucket, path, file) {
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${bucket}/${path}`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': file.type, 'x-upsert': 'true' },
+        body: file
+    });
+    if (!res.ok) throw new Error('Upload failed');
+    return `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}`;
+}
 
-    // =============================================
-    // ⏱️ COUNTDOWN
-    // =============================================
-    function updateCountdown() {
-        const container = document.getElementById('countdown');
-        const now = new Date();
-        let target = new Date(now);
-        const dayOfWeek = now.getDay();
-        const daysUntilSaturday = (6 - dayOfWeek + 7) % 7 || 7;
+// =============================================
+// ⏱️ COUNTDOWN
+// =============================================
+function updateCountdown() {
+    const container = document.getElementById('countdown');
+    const now = new Date();
+    let target = new Date(now);
+    const dow = now.getDay();
+    const daysUntil = (6 - dow + 7) % 7 || 7;
+    if (dow === 6 && now.getHours() < 12) { target.setHours(12,0,0,0); }
+    else if (dow === 6 && now.getHours() >= 12) { target.setDate(target.getDate()+7); target.setHours(12,0,0,0); }
+    else { target.setDate(target.getDate()+daysUntil); target.setHours(12,0,0,0); }
+    const diff = target - now;
+    if (diff <= 0) { container.innerHTML = '<div class="countdown-done">🔥 המלחמה התחילה! 🔥</div>'; return; }
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const m = Math.floor((diff%(1000*60*60))/(1000*60));
+    const s = Math.floor((diff%(1000*60))/1000);
+    container.innerHTML = `
+        <div class="countdown-item"><div class="number">${d}</div><div class="label">ימים</div></div>
+        <div class="countdown-item"><div class="number">${String(h).padStart(2,'0')}</div><div class="label">שעות</div></div>
+        <div class="countdown-item"><div class="number">${String(m).padStart(2,'0')}</div><div class="label">דקות</div></div>
+        <div class="countdown-item"><div class="number">${String(s).padStart(2,'0')}</div><div class="label">שניות</div></div>`;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-        if (dayOfWeek === 6 && now.getHours() < 12) {
-            target.setHours(12, 0, 0, 0);
-        } else if (dayOfWeek === 6 && now.getHours() >= 12) {
-            target.setDate(target.getDate() + 7);
-            target.setHours(12, 0, 0, 0);
-        } else {
-            target.setDate(target.getDate() + daysUntilSaturday);
-            target.setHours(12, 0, 0, 0);
-        }
+// =============================================
+// 🗳️ VOTING SYSTEM
+// =============================================
+const TEAMS = ['אורחי ושלם', 'נחום ובן', 'סם ועמית', 'דניאל וניר', 'עידו ויוגב'];
+const CATEGORIES = [
+    { id: 'champion', emoji: '🏆', title: 'מי ייקח את התואר?', desc: 'הזוג שישלוט במגרש' },
+    { id: 'choke', emoji: '😰', title: 'מי יחנק תחת לחץ?', desc: 'כשהלחץ עולה, מי יישבר?' },
+    { id: 'funny', emoji: '🤡', title: 'הפדיחה הכי גדולה?', desc: 'מי יספק את הרגע המביך?' },
+    { id: 'complaint', emoji: '😤', title: 'מי הכי יתלונן?', desc: 'על הרוח, השמש, הכדור...' },
+    { id: 'dark_horse', emoji: '🐴', title: 'סוס שחור - מי יפתיע?', desc: 'מי יגיע מלמטה?' },
+    { id: 'relegation', emoji: '📉', title: 'מי יורד ליגה?', desc: 'מישהו חייב ליפול...' },
+];
 
-        const diff = target - now;
-        if (diff <= 0) {
-            container.innerHTML = '<div class="countdown-done">🔥 המלחמה התחילה! 🔥</div>';
-            return;
-        }
+let allVotes = [];
+let myVotes = JSON.parse(localStorage.getItem('padelMyVotes') || '{}');
 
-        const days = Math.floor(diff / (1000*60*60*24));
-        const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-        const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-        const seconds = Math.floor((diff % (1000*60)) / 1000);
-
-        container.innerHTML = `
-            <div class="countdown-item"><div class="number">${days}</div><div class="label">ימים</div></div>
-            <div class="countdown-item"><div class="number">${String(hours).padStart(2,'0')}</div><div class="label">שעות</div></div>
-            <div class="countdown-item"><div class="number">${String(minutes).padStart(2,'0')}</div><div class="label">דקות</div></div>
-            <div class="countdown-item"><div class="number">${String(seconds).padStart(2,'0')}</div><div class="label">שניות</div></div>
-        `;
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // =============================================
-    // 📋 MATCHES
-    // =============================================
-    const teams = ['אורחי ושלם', 'נחום ובן', 'סם ועמית', 'דניאל וניר', 'עידו ויוגב'];
-    const matchesContainer = document.getElementById('matchesContainer');
-    const matchList = [];
-    for (let i = 0; i < teams.length; i++) {
-        for (let j = i + 1; j < teams.length; j++) {
-            matchList.push({ a: teams[i], b: teams[j] });
-        }
-    }
-    // Deterministic shuffle based on date
-    const seed = new Date().toISOString().slice(0,10);
-    matchList.sort((a, b) => (a.a + a.b + seed).localeCompare(b.a + b.b + seed));
-
-    matchList.forEach((match, idx) => {
-        const card = document.createElement('div');
-        card.className = 'match-card';
-        card.innerHTML = `
-            <div style="flex:1">
-                <div class="match-number">משחק ${idx + 1}</div>
-                <div style="display:flex;align-items:center;justify-content:center;">
-                    <div class="match-team">${match.a}</div>
-                    <div class="match-vs">VS</div>
-                    <div class="match-team">${match.b}</div>
+function buildVotingUI() {
+    const grid = document.getElementById('votingGrid');
+    grid.innerHTML = CATEGORIES.map(cat => `
+        <div class="vote-card" id="vote-card-${cat.id}">
+            <div class="vote-card-header">
+                <div class="vote-card-emoji">${cat.emoji}</div>
+                <div>
+                    <div class="vote-card-title">${cat.title}</div>
+                    <div class="vote-card-desc">${cat.desc}</div>
                 </div>
             </div>
-        `;
-        matchesContainer.appendChild(card);
-    });
-
-    // =============================================
-    // 🗣️ TRASH TALK - Supabase Connected
-    // =============================================
-    async function loadTrashTalks() {
-        try {
-            const client = await supabase.from('trash_talks');
-            const { data, error } = await client.select();
-            if (error) throw error;
-            renderTrashTalk(data || []);
-        } catch (e) {
-            console.error('Error loading trash talks:', e);
-            document.getElementById('trashtalkFeed').innerHTML =
-                '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינה - בדוק חיבור Supabase</p></div>';
-        }
-    }
-
-    function renderTrashTalk(talks) {
-        const feed = document.getElementById('trashtalkFeed');
-        if (!talks || talks.length === 0) {
-            feed.innerHTML = '<div class="empty-state"><div class="empty-emoji">🦗</div><p>שקט פה... תהיו הראשונים לירות טראש טוק!</p></div>';
-            return;
-        }
-        feed.innerHTML = talks.map(tt => {
-            const date = new Date(tt.created_at);
-            const timeStr = date.toLocaleString('he-IL', { day:'numeric', month:'numeric', hour:'2-digit', minute:'2-digit' });
-            return `
-                <div class="trashtalk-item">
-                    <div class="trashtalk-item-header">
-                        <span class="trashtalk-author">🎤 ${escapeHtml(tt.name)}</span>
-                        <span class="trashtalk-time">${timeStr}</span>
+            <div class="vote-options" id="vote-options-${cat.id}">
+                ${TEAMS.map(team => `
+                    <div class="vote-option ${myVotes[cat.id] === team ? 'voted' : ''}" 
+                         onclick="castVote('${cat.id}', '${team}')" 
+                         id="vo-${cat.id}-${team.replace(/\s/g,'')}">
+                        <div class="vote-bar" style="width:0%"></div>
+                        <div class="vote-option-name">${team}</div>
+                        <div class="vote-option-count">0</div>
                     </div>
-                    <div class="trashtalk-text">${escapeHtml(tt.message)}</div>
-                    ${tt.target ? `<div class="trashtalk-target">🎯 מכוון ל: ${escapeHtml(tt.target)}</div>` : ''}
-                </div>
-            `;
-        }).join('');
-    }
+                `).join('')}
+            </div>
+            <div class="vote-total" id="vote-total-${cat.id}">0 הצבעות</div>
+        </div>
+    `).join('');
+}
 
-    async function postTrashTalk() {
-        const name = document.getElementById('ttName').value.trim();
-        const target = document.getElementById('ttTarget').value;
-        const message = document.getElementById('ttMessage').value.trim();
-        const btn = document.getElementById('ttSubmitBtn');
+function updateVotingUI() {
+    CATEGORIES.forEach(cat => {
+        const catVotes = allVotes.filter(v => v.category === cat.id);
+        const total = catVotes.length;
+        const counts = {};
+        TEAMS.forEach(t => counts[t] = 0);
+        catVotes.forEach(v => { if (counts[v.team] !== undefined) counts[v.team]++; });
+        const maxCount = Math.max(...Object.values(counts), 1);
 
-        if (!name) { showToast('❌ מה השם שלך?!'); return; }
-        if (!message) { showToast('❌ כתוב משהו מעניין לפחות...'); return; }
-
-        btn.disabled = true;
-        btn.innerHTML = '<span class="loading-spinner"></span> שולח...';
-
-        try {
-            const client = await supabase.from('trash_talks');
-            const { error } = await client.insert({ name, target, message });
-            if (error) throw error;
-
-            document.getElementById('ttMessage').value = '';
-            document.getElementById('ttTarget').value = '';
-
-            // Save name for convenience
-            localStorage.setItem('padelUserName', name);
-
-            showToast('💣 טראש טוק נשלח!');
-            await loadTrashTalks();
-        } catch (e) {
-            console.error('Error posting:', e);
-            showToast('❌ שגיאה בשליחה - נסה שוב');
-        }
-
-        btn.disabled = false;
-        btn.textContent = '💣 שגר טראש טוק';
-    }
-
-    // =============================================
-    // 🎬 VIDEOS - Supabase Storage + DB
-    // =============================================
-    async function loadVideos() {
-        try {
-            const client = await supabase.from('videos');
-            const { data, error } = await client.select();
-            if (error) throw error;
-            renderVideos(data || []);
-        } catch (e) {
-            console.error('Error loading videos:', e);
-            document.getElementById('videosGrid').innerHTML =
-                '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינת סרטונים</p></div>';
-        }
-    }
-
-    function renderVideos(vids) {
-        const grid = document.getElementById('videosGrid');
-        if (!vids || vids.length === 0) {
-            grid.innerHTML = '<div class="empty-state"><div class="empty-emoji">🎬</div><p>עדיין אין סרטונים - תהיו הראשונים!</p></div>';
-            return;
-        }
-        grid.innerHTML = vids.map(v => {
-            const date = new Date(v.created_at);
-            const timeStr = date.toLocaleString('he-IL', { day:'numeric', month:'numeric', hour:'2-digit', minute:'2-digit' });
-            return `
-                <div class="video-card">
-                    <video controls preload="metadata"><source src="${v.video_url}"></video>
-                    <div class="video-card-info">
-                        <div class="v-team">🏓 ${escapeHtml(v.team)}</div>
-                        <div style="font-size:14px;color:rgba(255,255,255,0.6);margin:4px 0;">${escapeHtml(v.description || '')}</div>
-                        <div class="v-date">📅 ${timeStr}</div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    async function handleVideoUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const team = document.getElementById('videoTeamSelect').value;
-        const desc = document.getElementById('videoDescription').value.trim();
-
-        if (!team) {
-            showToast('❌ בחרו זוג לפני העלאה!');
-            event.target.value = '';
-            return;
-        }
-
-        if (file.size > 50 * 1024 * 1024) {
-            showToast('❌ הקובץ גדול מדי (מקס 50MB)');
-            event.target.value = '';
-            return;
-        }
-
-        // Show progress
-        const progress = document.getElementById('uploadProgress');
-        const progressBar = document.getElementById('uploadProgressBar');
-        progress.style.display = 'block';
-        progressBar.style.width = '30%';
-
-        try {
-            // Upload to Supabase Storage
-            const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
-            progressBar.style.width = '50%';
-
-            const { data: uploadData, error: uploadError } = await supabase.storage.from('videos').upload(fileName, file);
-            if (uploadError) throw uploadError;
-
-            progressBar.style.width = '80%';
-
-            // Get public URL
-            const { data: urlData } = supabase.storage.from('videos').getPublicUrl(fileName);
-
-            // Save metadata to database
-            const client = await supabase.from('videos');
-            const { error: dbError } = await client.insert({
-                team: team,
-                description: desc || 'ללא תיאור',
-                video_url: urlData.publicUrl,
-                uploaded_by: localStorage.getItem('padelUserName') || 'anonymous'
-            });
-            if (dbError) throw dbError;
-
-            progressBar.style.width = '100%';
-            showToast('🎬 סרטון הועלה בהצלחה!');
-            await loadVideos();
-        } catch (e) {
-            console.error('Upload error:', e);
-            showToast('❌ שגיאה בהעלאה - נסו שוב');
-        }
-
-        setTimeout(() => {
-            progress.style.display = 'none';
-            progressBar.style.width = '0%';
-        }, 1000);
-
-        event.target.value = '';
-        document.getElementById('videoDescription').value = '';
-    }
-
-    // =============================================
-    // 🔄 REAL-TIME POLLING
-    // =============================================
-    // Refresh data every 10 seconds
-    setInterval(() => {
-        loadTrashTalks();
-        loadVideos();
-    }, 10000);
-
-    // =============================================
-    // 🛠️ UTILITIES
-    // =============================================
-    function escapeHtml(text) {
-        if (!text) return '';
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    // =============================================
-    // 📜 NAV & SCROLL
-    // =============================================
-    window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('visible', window.scrollY > 300);
-        document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 600);
-    });
-
-    document.querySelectorAll('.nav a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        TEAMS.forEach(team => {
+            const el = document.getElementById(`vo-${cat.id}-${team.replace(/\s/g,'')}`);
+            if (!el) return;
+            const count = counts[team];
+            const pct = total > 0 ? (count / maxCount) * 100 : 0;
+            el.querySelector('.vote-option-count').textContent = count;
+            el.querySelector('.vote-bar').style.width = pct + '%';
+            el.className = 'vote-option' + (myVotes[cat.id] === team ? ' voted' : '');
         });
+
+        const totalEl = document.getElementById(`vote-total-${cat.id}`);
+        if (totalEl) totalEl.textContent = `${total} הצבעות`;
     });
+}
 
-    document.getElementById('ttMessage').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); postTrashTalk(); }
-    });
+async function loadVotes() {
+    try {
+        allVotes = await dbSelect('votes');
+        updateVotingUI();
+    } catch (e) { console.error('Error loading votes:', e); }
+}
 
-    // Load saved name
-    const savedName = localStorage.getItem('padelUserName');
-    if (savedName) document.getElementById('ttName').value = savedName;
+async function castVote(category, team) {
+    const voterName = document.getElementById('voterName').value.trim();
+    if (!voterName) { showToast('❌ קודם תכתבו את השם שלכם למעלה!'); return; }
 
-    // =============================================
-    // 🚀 INITIAL LOAD
-    // =============================================
-    loadTrashTalks();
-    loadVideos();
+    if (myVotes[category] === team) { showToast('🤷 כבר הצבעת לזה!'); return; }
+
+    // Optimistic update
+    myVotes[category] = team;
+    localStorage.setItem('padelMyVotes', JSON.stringify(myVotes));
+    localStorage.setItem('padelUserName', voterName);
+
+    try {
+        await dbInsert('votes', { category, team, voter_name: voterName });
+        showToast('🗳️ ההצבעה נרשמה!');
+        await loadVotes();
+    } catch (e) {
+        console.error('Vote error:', e);
+        showToast('❌ שגיאה - נסו שוב');
+    }
+}
+
+// =============================================
+// 🗣️ TRASH TALK
+// =============================================
+async function loadTrashTalks() {
+    try {
+        const data = await dbSelect('trash_talks');
+        renderTrashTalk(data || []);
+    } catch (e) {
+        console.error('Error:', e);
+        document.getElementById('trashtalkFeed').innerHTML = '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינה</p></div>';
+    }
+}
+
+function renderTrashTalk(talks) {
+    const feed = document.getElementById('trashtalkFeed');
+    if (!talks.length) { feed.innerHTML = '<div class="empty-state"><div class="empty-emoji">🦗</div><p>שקט פה... תהיו הראשונים!</p></div>'; return; }
+    feed.innerHTML = talks.map(tt => {
+        const d = new Date(tt.created_at);
+        const t = d.toLocaleString('he-IL', { day:'numeric', month:'numeric', hour:'2-digit', minute:'2-digit' });
+        return `<div class="trashtalk-item">
+            <div class="trashtalk-item-header">
+                <span class="trashtalk-author">🎤 ${esc(tt.name)}</span>
+                <span class="trashtalk-time">${t}</span>
+            </div>
+            <div class="trashtalk-text">${esc(tt.message)}</div>
+            ${tt.target ? `<div class="trashtalk-target">🎯 מכוון ל: ${esc(tt.target)}</div>` : ''}
+        </div>`;
+    }).join('');
+}
+
+async function postTrashTalk() {
+    const name = document.getElementById('ttName').value.trim();
+    const target = document.getElementById('ttTarget').value;
+    const message = document.getElementById('ttMessage').value.trim();
+    const btn = document.getElementById('ttSubmitBtn');
+    if (!name) { showToast('❌ מה השם שלך?!'); return; }
+    if (!message) { showToast('❌ כתוב משהו מעניין...'); return; }
+    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> שולח...';
+    try {
+        await dbInsert('trash_talks', { name, target, message });
+        document.getElementById('ttMessage').value = '';
+        document.getElementById('ttTarget').value = '';
+        localStorage.setItem('padelUserName', name);
+        showToast('💣 טראש טוק נשלח!');
+        await loadTrashTalks();
+    } catch (e) { console.error(e); showToast('❌ שגיאה - נסה שוב'); }
+    btn.disabled = false; btn.textContent = '💣 שגר טראש טוק';
+}
+
+// =============================================
+// 🎬 VIDEOS
+// =============================================
+async function loadVideos() {
+    try {
+        const data = await dbSelect('videos');
+        renderVideos(data || []);
+    } catch (e) {
+        console.error('Error:', e);
+        document.getElementById('videosGrid').innerHTML = '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה</p></div>';
+    }
+}
+
+function renderVideos(vids) {
+    const grid = document.getElementById('videosGrid');
+    if (!vids.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-emoji">🎬</div><p>עדיין אין סרטונים - תהיו הראשונים!</p></div>'; return; }
+    grid.innerHTML = vids.map(v => {
+        const d = new Date(v.created_at);
+        const t = d.toLocaleString('he-IL', { day:'numeric', month:'numeric', hour:'2-digit', minute:'2-digit' });
+        return `<div class="video-card">
+            <video controls preload="metadata"><source src="${v.video_url}"></video>
+            <div class="video-card-info">
+                <div class="v-team">🏓 ${esc(v.team)}</div>
+                <div style="font-size:14px;color:rgba(255,255,255,0.6);margin:4px 0;">${esc(v.description||'')}</div>
+                <div class="v-date">📅 ${t} | 👤 ${esc(v.uploaded_by||'')}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+async function handleVideoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const team = document.getElementById('videoTeamSelect').value;
+    const desc = document.getElementById('videoDescription').value.trim();
+    if (!team) { showToast('❌ בחרו זוג!'); event.target.value=''; return; }
+    if (file.size > 50*1024*1024) { showToast('❌ מקס 50MB'); event.target.value=''; return; }
+    const progress = document.getElementById('uploadProgress');
+    const bar = document.getElementById('uploadProgressBar');
+    progress.style.display='block'; bar.style.width='30%';
+    try {
+        const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
+        bar.style.width='50%';
+        const publicUrl = await storageUpload('videos', fileName, file);
+        bar.style.width='80%';
+        await dbInsert('videos', { team, description: desc||'ללא תיאור', video_url: publicUrl, uploaded_by: localStorage.getItem('padelUserName')||'anonymous' });
+        bar.style.width='100%';
+        showToast('🎬 סרטון הועלה!');
+        await loadVideos();
+    } catch (e) { console.error(e); showToast('❌ שגיאה בהעלאה'); }
+    setTimeout(() => { progress.style.display='none'; bar.style.width='0%'; }, 1000);
+    event.target.value=''; document.getElementById('videoDescription').value='';
+}
+
+// =============================================
+// 🛠️ UTILS
+// =============================================
+function esc(text) { if (!text) return ''; const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+
+// =============================================
+// 📜 NAV & SCROLL
+// =============================================
+window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('visible', window.scrollY > 300);
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 600);
+});
+document.querySelectorAll('.nav a').forEach(link => {
+    link.addEventListener('click', e => { e.preventDefault(); document.querySelector(link.getAttribute('href'))?.scrollIntoView({ behavior:'smooth' }); });
+});
+document.getElementById('ttMessage').addEventListener('keydown', e => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); postTrashTalk(); } });
+
+// Sync voter name across inputs
+document.getElementById('voterName').addEventListener('input', e => {
+    document.getElementById('ttName').value = e.target.value;
+    localStorage.setItem('padelUserName', e.target.value);
+});
+
+// Load saved name
+const savedName = localStorage.getItem('padelUserName') || '';
+document.getElementById('voterName').value = savedName;
+document.getElementById('ttName').value = savedName;
+
+// =============================================
+// 🚀 INIT
+// =============================================
+buildVotingUI();
+loadVotes();
+loadTrashTalks();
+loadVideos();
+
+// Auto refresh every 10 seconds
+setInterval(() => { loadVotes(); loadTrashTalks(); loadVideos(); }, 10000);
 </script>
 
 </body>
