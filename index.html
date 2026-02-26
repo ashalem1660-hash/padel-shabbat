@@ -14,7 +14,6 @@
             --glass-border: rgba(255,255,255,0.1);
         }
         body { font-family: 'Heebo', sans-serif; background: var(--dark); color: #fff; overflow-x: hidden; }
-
         .bg-animation {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -26,9 +25,7 @@
                         radial-gradient(circle at 50% 80%, rgba(247,201,72,0.05) 0%, transparent 50%);
             animation: bgMove 20s ease-in-out infinite;
         }
-        @keyframes bgMove { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-2%,-2%); } }
-
-        /* Hero */
+        @keyframes bgMove { 0%,100%{transform:translate(0,0);}50%{transform:translate(-2%,-2%);} }
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center; padding: 20px;
@@ -39,16 +36,14 @@
             font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
             margin-bottom: 20px; animation: pulse 2s ease-in-out infinite;
         }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,107,53,0.4); } }
+        @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.05);box-shadow:0 0 30px rgba(255,107,53,0.4);} }
         .hero h1 {
             font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
             background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--primary) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text; line-height: 1.1; margin-bottom: 10px;
         }
-        .hero-subtitle { font-size: clamp(1.2rem, 3vw, 1.8rem); color: rgba(255,255,255,0.7); margin-bottom: 40px; font-weight: 300; }
-
-        /* Countdown */
+        .hero-subtitle { font-size: clamp(1.2rem,3vw,1.8rem); color: rgba(255,255,255,0.7); margin-bottom: 40px; font-weight: 300; }
         .countdown-container { margin: 30px 0; }
         .countdown-label { font-size: 18px; color: var(--accent); font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 3px; }
         .countdown { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
@@ -66,8 +61,6 @@
         }
         .countdown-item .label { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
         .countdown-done { font-size: 2.5rem; font-weight: 900; color: var(--accent); animation: pulse 1s ease-in-out infinite; }
-
-        /* Location */
         .location-bar { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
         .location-bar a {
             display: inline-flex; align-items: center; gap: 8px;
@@ -76,15 +69,11 @@
         }
         .btn-waze { background: linear-gradient(135deg, #33ccff, #05b5e4); color: #fff; }
         .btn-google { background: linear-gradient(135deg, #34a853, #0d8043); color: #fff; }
-        .btn-waze:hover, .btn-google:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-
-        /* Sections */
+        .btn-waze:hover,.btn-google:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 10px; }
+        .section-title { text-align: center; font-size: clamp(2rem,5vw,3rem); font-weight: 900; margin-bottom: 10px; }
         .section-subtitle { text-align: center; color: rgba(255,255,255,0.5); font-size: 16px; margin-bottom: 40px; }
         .divider { width: 80px; height: 4px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 2px; margin: 0 auto 30px; }
-
-        /* Teams */
         .teams-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         .team-card {
             background: var(--glass); border: 1px solid var(--glass-border);
@@ -116,46 +105,53 @@
         .team-stat .stat-value { font-size: 1.3rem; font-weight: 900; color: var(--accent); }
         .team-stat .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Voting Section */
-        .voting-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
-        .vote-card {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: 20px; padding: 25px; transition: all 0.3s;
+        /* Request & Trashtalk shared styles */
+        .form-section {
+            border-radius: 24px; padding: 40px; margin-top: 20px;
         }
-        .vote-card:hover { border-color: var(--accent); }
-        .vote-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-        .vote-card-emoji { font-size: 2.5rem; }
-        .vote-card-title { font-size: 1.2rem; font-weight: 900; }
-        .vote-card-desc { font-size: 13px; color: rgba(255,255,255,0.4); }
+        .form-section.requests {
+            background: linear-gradient(135deg, rgba(0,78,137,0.15), rgba(46,196,182,0.05));
+            border: 1px solid rgba(0,78,137,0.2);
+        }
+        .form-section.trashtalk {
+            background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(255,107,53,0.05));
+            border: 1px solid rgba(230,57,70,0.2);
+        }
+        .the-form { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto 30px; }
+        .the-form input, .the-form textarea, .the-form select {
+            padding: 14px 18px; border-radius: 12px; border: 1px solid var(--glass-border);
+            background: var(--darker); color: #fff; font-family: 'Heebo', sans-serif; font-size: 15px; transition: border-color 0.3s;
+        }
+        .the-form input:focus, .the-form textarea:focus { outline: none; border-color: var(--primary); }
+        .the-form textarea { min-height: 80px; resize: vertical; }
+        .submit-btn {
+            padding: 14px; border: none; border-radius: 12px;
+            color: #fff; font-family: 'Heebo', sans-serif; font-size: 16px;
+            font-weight: 700; cursor: pointer; transition: all 0.3s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .submit-btn.orange { background: linear-gradient(135deg, var(--danger), var(--primary)); }
+        .submit-btn.orange:hover { box-shadow: 0 10px 30px rgba(230,57,70,0.3); }
+        .submit-btn.blue { background: linear-gradient(135deg, var(--secondary), var(--success)); }
+        .submit-btn.blue:hover { box-shadow: 0 10px 30px rgba(0,78,137,0.3); }
 
-        .vote-options { display: flex; flex-direction: column; gap: 8px; }
-        .vote-option {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 16px; border-radius: 12px; cursor: pointer;
-            background: rgba(0,0,0,0.2); border: 1px solid transparent;
-            transition: all 0.3s; position: relative; overflow: hidden;
+        .feed { max-height: 600px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .feed::-webkit-scrollbar { width: 6px; }
+        .feed::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+        .feed-item {
+            background: rgba(0,0,0,0.2); border-radius: 16px; padding: 18px;
+            animation: slideIn 0.3s ease-out;
         }
-        .vote-option:hover { border-color: var(--primary); background: rgba(255,107,53,0.08); }
-        .vote-option.voted { border-color: var(--accent); background: rgba(247,201,72,0.1); }
-        .vote-option-name { font-weight: 700; font-size: 14px; flex: 1; z-index: 1; }
-        .vote-option-count {
-            background: rgba(255,255,255,0.1); padding: 3px 10px;
-            border-radius: 50px; font-size: 13px; font-weight: 700; z-index: 1;
-            min-width: 35px; text-align: center;
-        }
-        .vote-bar {
-            position: absolute; top: 0; right: 0; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,107,53,0.15));
-            border-radius: 12px; transition: width 0.5s ease;
-        }
-        .vote-total { text-align: center; margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.3); }
-        .voter-name-input {
-            width: 100%; padding: 12px 16px; border-radius: 12px;
-            border: 1px solid var(--glass-border); background: var(--darker);
-            color: #fff; font-family: 'Heebo'; font-size: 14px;
-            margin-bottom: 20px; text-align: center;
-        }
-        .voter-name-input:focus { outline: none; border-color: var(--primary); }
+        .feed-item.tt { border-right: 4px solid var(--primary); }
+        .feed-item.req { border-right: 4px solid var(--success); }
+        @keyframes slideIn { from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);} }
+        .feed-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .feed-author { font-weight: 700; color: var(--accent); font-size: 14px; }
+        .feed-time { font-size: 12px; color: rgba(255,255,255,0.3); }
+        .feed-text { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.6; }
+        .feed-target { font-size: 12px; color: var(--primary); margin-top: 5px; }
+        .feed-count { text-align: center; padding: 10px; font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 700; }
 
         /* Videos */
         .video-section { margin-top: 30px; }
@@ -181,52 +177,6 @@
         .upload-progress { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 10px; overflow: hidden; display: none; }
         .upload-progress-bar { height: 100%; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 3px; transition: width 0.3s; width: 0%; }
 
-        /* Trash Talk */
-        .trashtalk-section {
-            background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(255,107,53,0.05));
-            border: 1px solid rgba(230,57,70,0.2); border-radius: 24px; padding: 40px; margin-top: 20px;
-        }
-        .trashtalk-form { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto 30px; }
-        .trashtalk-form input, .trashtalk-form textarea, .trashtalk-form select {
-            padding: 14px 18px; border-radius: 12px; border: 1px solid var(--glass-border);
-            background: var(--darker); color: #fff; font-family: 'Heebo'; font-size: 15px; transition: border-color 0.3s;
-        }
-        .trashtalk-form input:focus, .trashtalk-form textarea:focus { outline: none; border-color: var(--primary); }
-        .trashtalk-form textarea { min-height: 80px; resize: vertical; }
-        .trashtalk-form button {
-            padding: 14px; border: none; border-radius: 12px;
-            background: linear-gradient(135deg, var(--danger), var(--primary));
-            color: #fff; font-family: 'Heebo'; font-size: 16px;
-            font-weight: 700; cursor: pointer; transition: all 0.3s;
-        }
-        .trashtalk-form button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(230,57,70,0.3); }
-        .trashtalk-form button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .trashtalk-feed { max-height: 500px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .trashtalk-feed::-webkit-scrollbar { width: 6px; }
-        .trashtalk-feed::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
-        .trashtalk-item {
-            background: rgba(0,0,0,0.2); border-radius: 16px; padding: 18px;
-            border-right: 4px solid var(--primary); animation: slideIn 0.3s ease-out;
-        }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        .trashtalk-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .trashtalk-author { font-weight: 700; color: var(--accent); font-size: 14px; }
-        .trashtalk-time { font-size: 12px; color: rgba(255,255,255,0.3); }
-        .trashtalk-text { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.6; }
-        .trashtalk-target { font-size: 12px; color: var(--primary); margin-top: 5px; }
-
-        /* Predictions */
-        .fun-predictions { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .prediction-card {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: 16px; padding: 25px; text-align: center; transition: all 0.3s;
-        }
-        .prediction-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .prediction-emoji { font-size: 3rem; margin-bottom: 10px; }
-        .prediction-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
-        .prediction-desc { color: rgba(255,255,255,0.5); font-size: 14px; }
-
-        /* Misc */
         .footer { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.3); font-size: 14px; border-top: 1px solid var(--glass-border); margin-top: 40px; }
         .footer .emoji-row { font-size: 2rem; margin-bottom: 10px; }
         .scroll-top {
@@ -264,18 +214,18 @@
             border: 3px solid rgba(255,255,255,0.3); border-radius: 50%;
             border-top-color: #fff; animation: spin 0.8s linear infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin { to{transform:rotate(360deg);} }
         .realtime-dot {
             width: 8px; height: 8px; background: var(--success);
             border-radius: 50%; display: inline-block; margin-left: 5px;
             animation: blink 2s ease-in-out infinite;
         }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.3;} }
         @media (max-width: 600px) {
             .countdown-item { min-width: 70px; padding: 15px; }
             .countdown-item .number { font-size: 2rem; }
-            .trashtalk-section { padding: 25px 15px; }
-            .teams-grid, .voting-grid { grid-template-columns: 1fr; }
+            .form-section { padding: 25px 15px; }
+            .teams-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -286,7 +236,7 @@
 <nav class="nav" id="navbar">
     <a href="#hero">🏠 בית</a>
     <a href="#teams">👥 זוגות</a>
-    <a href="#voting">🗳️ הצבעות</a>
+    <a href="#requests">📋 בקשות</a>
     <a href="#videos">🎬 סרטונים</a>
     <a href="#trashtalk">🔥 טראש טוק</a>
 </nav>
@@ -321,7 +271,7 @@
                 <div class="team-number">1</div>
                 <div><div class="team-names">אורחי ושלם</div><span class="team-tag tag-fire">🔥 רותחים</span></div>
             </div>
-            <div class="team-description">באים רותחים למשחק. עבודת צוות ומלחמה - זה המוטו. אל תנסו לדבר איתם לפני המשחק, הם כבר בראש של קרב. הזוג שלא מוותר על כדור, גם אם זה אומר לשבור קיר.</div>
+            <div class="team-description">באים רותחים למשחק. עבודת צוות ומלחמה - זה המוטו. אל תנסו לדבר איתם לפני המשחק, הם כבר בראש של קרב.</div>
             <div class="team-stats">
                 <div class="team-stat"><div class="stat-value">🔥</div><div class="stat-label">מוטיבציה</div></div>
                 <div class="team-stat"><div class="stat-value">💀</div><div class="stat-label">רמת איום</div></div>
@@ -333,7 +283,7 @@
                 <div class="team-number">2</div>
                 <div><div class="team-names">נחום ובן</div><span class="team-tag tag-pressure">😤 תחת לחץ</span></div>
             </div>
-            <div class="team-description">נחום מגיע ישר ממחנה אימונים - רמת הכושר בשיא אבל הלחץ? הלחץ פוצץ. כולם מצפים ממנו לביצועים ובן צריך לשמור עליו שלא יתפוצץ. הזוג שהציפיות עליו הכי גבוהות.</div>
+            <div class="team-description">נחום מגיע ישר ממחנה אימונים - רמת הכושר בשיא אבל הלחץ פוצץ. כולם מצפים ממנו לביצועים ובן צריך לשמור עליו שלא יתפוצץ.</div>
             <div class="team-stats">
                 <div class="team-stat"><div class="stat-value">💪</div><div class="stat-label">כושר</div></div>
                 <div class="team-stat"><div class="stat-value">📈</div><div class="stat-label">לחץ</div></div>
@@ -345,7 +295,7 @@
                 <div class="team-number">3</div>
                 <div><div class="team-names">סם ועמית</div><span class="team-tag tag-danger">⚠️ מועמדים לירידה</span></div>
             </div>
-            <div class="team-description">מועמדים לירידת ליגה ובגדול. סם, שמכר את שלם שבת קודמת, מנסה למצוא גאולה עם עמית. השאלה היא - האם עמית יצליח לסחוב, או שזו תהיה עוד שבת של בושות?</div>
+            <div class="team-description">מועמדים לירידת ליגה ובגדול. סם, שמכר את שלם שבת קודמת, מנסה למצוא גאולה עם עמית. האם זו תהיה עוד שבת של בושות?</div>
             <div class="team-stats">
                 <div class="team-stat"><div class="stat-value">📉</div><div class="stat-label">פורמה</div></div>
                 <div class="team-stat"><div class="stat-value">🤡</div><div class="stat-label">אמינות</div></div>
@@ -357,7 +307,7 @@
                 <div class="team-number">4</div>
                 <div><div class="team-names">דניאל וניר</div><span class="team-tag tag-drama">🎭 סוס שחור</span></div>
             </div>
-            <div class="team-description">הסוס השחור של הטורניר. אף אחד לא יודע מה לצפות מהם וזה בדיוק מה שעושה אותם מסוכנים. שקטים, ממוקדים, ועם עיניים על הפרס. אל תזלזלו.</div>
+            <div class="team-description">הסוס השחור של הטורניר. אף אחד לא יודע מה לצפות מהם וזה בדיוק מה שעושה אותם מסוכנים. שקטים, ממוקדים, ועם עיניים על הפרס.</div>
             <div class="team-stats">
                 <div class="team-stat"><div class="stat-value">🐴</div><div class="stat-label">הפתעה</div></div>
                 <div class="team-stat"><div class="stat-value">🎯</div><div class="stat-label">מיקוד</div></div>
@@ -369,7 +319,7 @@
                 <div class="team-number">5</div>
                 <div><div class="team-names">עידו ויוגב</div><span class="team-tag tag-stable">🏘️ השכונה</span></div>
             </div>
-            <div class="team-description">באים יחסית יציבים אבל אל תטעו - הם עושים שכונה. התלונות? אינסופיות. על הרוח, על השמש, על הכדור, על השופט שלא קיים. אבל איכשהו הם ממשיכים לשחק.</div>
+            <div class="team-description">באים יחסית יציבים אבל אל תטעו - הם עושים שכונה. התלונות? אינסופיות. על הרוח, על השמש, על הכדור. אבל איכשהו הם ממשיכים לשחק.</div>
             <div class="team-stats">
                 <div class="team-stat"><div class="stat-value">😤</div><div class="stat-label">תלונות</div></div>
                 <div class="team-stat"><div class="stat-value">📊</div><div class="stat-label">יציבות</div></div>
@@ -379,18 +329,20 @@
     </div>
 </section>
 
-<!-- VOTING -->
-<section class="section" id="voting">
-    <h2 class="section-title">🗳️ הצבעות להנהלה <span class="realtime-dot"></span></h2>
-    <p class="section-subtitle">העם בוחר! הצביעו ותראו תוצאות בזמן אמת</p>
+<!-- REQUESTS -->
+<section class="section" id="requests">
+    <h2 class="section-title">📋 בקשות מההנהלה <span class="realtime-dot"></span></h2>
+    <p class="section-subtitle">יש לכם בקשה? דרישה? תלונה? ההנהלה (לא) מקשיבה</p>
     <div class="divider"></div>
-
-    <div style="max-width:400px; margin: 0 auto 30px;">
-        <input type="text" class="voter-name-input" id="voterName" placeholder="🏷️ הכניסו את השם שלכם להצבעה">
-    </div>
-
-    <div class="voting-grid" id="votingGrid">
-        <!-- Generated by JS -->
+    <div class="form-section requests">
+        <div class="the-form" id="requestForm">
+            <input type="text" id="reqName" placeholder="השם שלך 🏷️" maxlength="30">
+            <textarea id="reqMessage" placeholder="מה הבקשה / דרישה / תלונה שלך? ✍️" maxlength="500"></textarea>
+            <button type="button" class="submit-btn blue" id="reqSubmitBtn" onclick="postRequest()">📨 שלח בקשה להנהלה</button>
+        </div>
+        <div class="feed" id="requestsFeed">
+            <div class="empty-state"><div class="empty-emoji">📋</div><p>טוען בקשות...</p></div>
+        </div>
     </div>
 </section>
 
@@ -431,8 +383,8 @@
     <h2 class="section-title">🗣️ טראש טוק <span class="realtime-dot"></span></h2>
     <p class="section-subtitle">פה זה המקום להראות מי באמת אלוף - במילים</p>
     <div class="divider"></div>
-    <div class="trashtalk-section">
-        <div class="trashtalk-form">
+    <div class="form-section trashtalk">
+        <div class="the-form" id="trashForm">
             <input type="text" id="ttName" placeholder="השם שלך 🏷️" maxlength="30">
             <select id="ttTarget">
                 <option value="">נגד מי? (אופציונלי)</option>
@@ -443,9 +395,9 @@
                 <option value="עידו ויוגב">עידו ויוגב 🏘️</option>
             </select>
             <textarea id="ttMessage" placeholder="שפכו את הרעל... 🐍" maxlength="500"></textarea>
-            <button id="ttSubmitBtn" onclick="postTrashTalk()">💣 שגר טראש טוק</button>
+            <button type="button" class="submit-btn orange" id="ttSubmitBtn" onclick="postTrashTalk()">💣 שגר טראש טוק</button>
         </div>
-        <div class="trashtalk-feed" id="trashtalkFeed">
+        <div class="feed" id="trashtalkFeed">
             <div class="empty-state"><div class="empty-emoji">💬</div><p>טוען...</p></div>
         </div>
     </div>
@@ -463,307 +415,394 @@
 
 <script>
 // =============================================
-// 🔧 SUPABASE CONFIG
+// 🔧 SUPABASE CONFIG - שים את המפתחות שלך פה!
 // =============================================
 const SUPABASE_URL = https://rrzhtfnztsrdisxdkyoe.supabase.co;
 const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJyemh0Zm56dHNyZGlzeGRreW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMDQwNzgsImV4cCI6MjA4NzY4MDA3OH0.edWdN6NubhswbtHBCm7Rpk4wc19fwxrrPtZVH3Mdhi4;
 
-const supabaseHeaders = {
-    'apikey': SUPABASE_KEY,
-    'Authorization': `Bearer ${SUPABASE_KEY}`,
-    'Content-Type': 'application/json',
-    'Prefer': 'return=representation'
-};
-
-// Simple fetch helpers
-async function dbSelect(table) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?select=*&order=created_at.desc`, { headers: supabaseHeaders });
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
+// =============================================
+// 🛠️ DATABASE HELPERS
+// =============================================
+function getHeaders() {
+    return {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+    };
 }
 
-async function dbInsert(table, data) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
-        method: 'POST', headers: supabaseHeaders, body: JSON.stringify(data)
+function dbSelect(table) {
+    return fetch(SUPABASE_URL + '/rest/v1/' + table + '?select=*&order=created_at.desc', {
+        method: 'GET',
+        headers: getHeaders()
+    }).then(function(res) {
+        if (!res.ok) {
+            return res.text().then(function(t) { throw new Error(t); });
+        }
+        return res.json();
     });
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
 }
 
-async function storageUpload(bucket, path, file) {
-    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${bucket}/${path}`, {
+function dbInsert(table, data) {
+    return fetch(SUPABASE_URL + '/rest/v1/' + table, {
         method: 'POST',
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': file.type, 'x-upsert': 'true' },
-        body: file
+        headers: getHeaders(),
+        body: JSON.stringify(data)
+    }).then(function(res) {
+        if (!res.ok) {
+            return res.text().then(function(t) { throw new Error(t); });
+        }
+        return res.json();
     });
-    if (!res.ok) throw new Error('Upload failed');
-    return `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}`;
+}
+
+function storageUpload(bucket, path, file) {
+    return fetch(SUPABASE_URL + '/storage/v1/object/' + bucket + '/' + path, {
+        method: 'POST',
+        headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'Content-Type': file.type,
+            'x-upsert': 'true'
+        },
+        body: file
+    }).then(function(res) {
+        if (!res.ok) throw new Error('Upload failed');
+        return SUPABASE_URL + '/storage/v1/object/public/' + bucket + '/' + path;
+    });
+}
+
+// =============================================
+// 🛠️ UTILITIES
+// =============================================
+function esc(text) {
+    if (!text) return '';
+    var d = document.createElement('div');
+    d.textContent = text;
+    return d.innerHTML;
+}
+
+function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
+function formatTime(dateStr) {
+    var d = new Date(dateStr);
+    return d.toLocaleString('he-IL', { day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit' });
 }
 
 // =============================================
 // ⏱️ COUNTDOWN
 // =============================================
 function updateCountdown() {
-    const container = document.getElementById('countdown');
-    const now = new Date();
-    let target = new Date(now);
-    const dow = now.getDay();
-    const daysUntil = (6 - dow + 7) % 7 || 7;
-    if (dow === 6 && now.getHours() < 12) { target.setHours(12,0,0,0); }
-    else if (dow === 6 && now.getHours() >= 12) { target.setDate(target.getDate()+7); target.setHours(12,0,0,0); }
-    else { target.setDate(target.getDate()+daysUntil); target.setHours(12,0,0,0); }
-    const diff = target - now;
-    if (diff <= 0) { container.innerHTML = '<div class="countdown-done">🔥 המלחמה התחילה! 🔥</div>'; return; }
-    const d = Math.floor(diff/(1000*60*60*24));
-    const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-    const m = Math.floor((diff%(1000*60*60))/(1000*60));
-    const s = Math.floor((diff%(1000*60))/1000);
-    container.innerHTML = `
-        <div class="countdown-item"><div class="number">${d}</div><div class="label">ימים</div></div>
-        <div class="countdown-item"><div class="number">${String(h).padStart(2,'0')}</div><div class="label">שעות</div></div>
-        <div class="countdown-item"><div class="number">${String(m).padStart(2,'0')}</div><div class="label">דקות</div></div>
-        <div class="countdown-item"><div class="number">${String(s).padStart(2,'0')}</div><div class="label">שניות</div></div>`;
+    var container = document.getElementById('countdown');
+    var now = new Date();
+    var target = new Date(now);
+    var dow = now.getDay();
+    if (dow === 6 && now.getHours() < 12) {
+        target.setHours(12, 0, 0, 0);
+    } else if (dow === 6 && now.getHours() >= 12) {
+        target.setDate(target.getDate() + 7);
+        target.setHours(12, 0, 0, 0);
+    } else {
+        var daysUntil = (6 - dow + 7) % 7;
+        if (daysUntil === 0) daysUntil = 7;
+        target.setDate(target.getDate() + daysUntil);
+        target.setHours(12, 0, 0, 0);
+    }
+    var diff = target - now;
+    if (diff <= 0) {
+        container.innerHTML = '<div class="countdown-done">🔥 המלחמה התחילה! 🔥</div>';
+        return;
+    }
+    var dd = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hh = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var mm = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var ss = Math.floor((diff % (1000 * 60)) / 1000);
+    container.innerHTML =
+        '<div class="countdown-item"><div class="number">' + dd + '</div><div class="label">ימים</div></div>' +
+        '<div class="countdown-item"><div class="number">' + String(hh).padStart(2, '0') + '</div><div class="label">שעות</div></div>' +
+        '<div class="countdown-item"><div class="number">' + String(mm).padStart(2, '0') + '</div><div class="label">דקות</div></div>' +
+        '<div class="countdown-item"><div class="number">' + String(ss).padStart(2, '0') + '</div><div class="label">שניות</div></div>';
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // =============================================
-// 🗳️ VOTING SYSTEM
+// 📋 REQUESTS TO MANAGEMENT
 // =============================================
-const TEAMS = ['אורחי ושלם', 'נחום ובן', 'סם ועמית', 'דניאל וניר', 'עידו ויוגב'];
-const CATEGORIES = [
-    { id: 'champion', emoji: '🏆', title: 'מי ייקח את התואר?', desc: 'הזוג שישלוט במגרש' },
-    { id: 'choke', emoji: '😰', title: 'מי יחנק תחת לחץ?', desc: 'כשהלחץ עולה, מי יישבר?' },
-    { id: 'funny', emoji: '🤡', title: 'הפדיחה הכי גדולה?', desc: 'מי יספק את הרגע המביך?' },
-    { id: 'complaint', emoji: '😤', title: 'מי הכי יתלונן?', desc: 'על הרוח, השמש, הכדור...' },
-    { id: 'dark_horse', emoji: '🐴', title: 'סוס שחור - מי יפתיע?', desc: 'מי יגיע מלמטה?' },
-    { id: 'relegation', emoji: '📉', title: 'מי יורד ליגה?', desc: 'מישהו חייב ליפול...' },
-];
-
-let allVotes = [];
-let myVotes = JSON.parse(localStorage.getItem('padelMyVotes') || '{}');
-
-function buildVotingUI() {
-    const grid = document.getElementById('votingGrid');
-    grid.innerHTML = CATEGORIES.map(cat => `
-        <div class="vote-card" id="vote-card-${cat.id}">
-            <div class="vote-card-header">
-                <div class="vote-card-emoji">${cat.emoji}</div>
-                <div>
-                    <div class="vote-card-title">${cat.title}</div>
-                    <div class="vote-card-desc">${cat.desc}</div>
-                </div>
-            </div>
-            <div class="vote-options" id="vote-options-${cat.id}">
-                ${TEAMS.map(team => `
-                    <div class="vote-option ${myVotes[cat.id] === team ? 'voted' : ''}" 
-                         onclick="castVote('${cat.id}', '${team}')" 
-                         id="vo-${cat.id}-${team.replace(/\s/g,'')}">
-                        <div class="vote-bar" style="width:0%"></div>
-                        <div class="vote-option-name">${team}</div>
-                        <div class="vote-option-count">0</div>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="vote-total" id="vote-total-${cat.id}">0 הצבעות</div>
-        </div>
-    `).join('');
-}
-
-function updateVotingUI() {
-    CATEGORIES.forEach(cat => {
-        const catVotes = allVotes.filter(v => v.category === cat.id);
-        const total = catVotes.length;
-        const counts = {};
-        TEAMS.forEach(t => counts[t] = 0);
-        catVotes.forEach(v => { if (counts[v.team] !== undefined) counts[v.team]++; });
-        const maxCount = Math.max(...Object.values(counts), 1);
-
-        TEAMS.forEach(team => {
-            const el = document.getElementById(`vo-${cat.id}-${team.replace(/\s/g,'')}`);
-            if (!el) return;
-            const count = counts[team];
-            const pct = total > 0 ? (count / maxCount) * 100 : 0;
-            el.querySelector('.vote-option-count').textContent = count;
-            el.querySelector('.vote-bar').style.width = pct + '%';
-            el.className = 'vote-option' + (myVotes[cat.id] === team ? ' voted' : '');
-        });
-
-        const totalEl = document.getElementById(`vote-total-${cat.id}`);
-        if (totalEl) totalEl.textContent = `${total} הצבעות`;
+function loadRequests() {
+    dbSelect('votes').then(function(data) {
+        renderRequests(data || []);
+    }).catch(function(e) {
+        console.error('Error loading requests:', e);
+        document.getElementById('requestsFeed').innerHTML =
+            '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינה - בדקו חיבור</p></div>';
     });
 }
 
-async function loadVotes() {
-    try {
-        allVotes = await dbSelect('votes');
-        updateVotingUI();
-    } catch (e) { console.error('Error loading votes:', e); }
+function renderRequests(items) {
+    var feed = document.getElementById('requestsFeed');
+    if (!items || items.length === 0) {
+        feed.innerHTML = '<div class="empty-state"><div class="empty-emoji">📋</div><p>עדיין אין בקשות - תהיו הראשונים!</p></div>';
+        return;
+    }
+    var html = '<div class="feed-count">📊 ' + items.length + ' בקשות עד עכשיו</div>';
+    for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        html += '<div class="feed-item req">' +
+            '<div class="feed-item-header">' +
+                '<span class="feed-author">📋 ' + esc(item.voter_name) + '</span>' +
+                '<span class="feed-time">' + formatTime(item.created_at) + '</span>' +
+            '</div>' +
+            '<div class="feed-text">' + esc(item.team) + '</div>' +
+        '</div>';
+    }
+    feed.innerHTML = html;
 }
 
-async function castVote(category, team) {
-    const voterName = document.getElementById('voterName').value.trim();
-    if (!voterName) { showToast('❌ קודם תכתבו את השם שלכם למעלה!'); return; }
+function postRequest() {
+    var name = document.getElementById('reqName').value.trim();
+    var message = document.getElementById('reqMessage').value.trim();
+    var btn = document.getElementById('reqSubmitBtn');
 
-    if (myVotes[category] === team) { showToast('🤷 כבר הצבעת לזה!'); return; }
-
-    // Optimistic update
-    myVotes[category] = team;
-    localStorage.setItem('padelMyVotes', JSON.stringify(myVotes));
-    localStorage.setItem('padelUserName', voterName);
-
-    try {
-        await dbInsert('votes', { category, team, voter_name: voterName });
-        showToast('🗳️ ההצבעה נרשמה!');
-        await loadVotes();
-    } catch (e) {
-        console.error('Vote error:', e);
-        showToast('❌ שגיאה - נסו שוב');
+    if (!name) {
+        showToast('❌ מה השם שלך?!');
+        return;
     }
+    if (!message) {
+        showToast('❌ כתוב בקשה...');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> שולח...';
+
+    dbInsert('votes', {
+        category: 'request',
+        team: message,
+        voter_name: name
+    }).then(function() {
+        document.getElementById('reqMessage').value = '';
+        localStorage.setItem('padelUserName', name);
+        showToast('📨 הבקשה נשלחה להנהלה!');
+        return loadRequests();
+    }).catch(function(e) {
+        console.error('Error posting request:', e);
+        showToast('❌ שגיאה - נסו שוב');
+    }).finally(function() {
+        btn.disabled = false;
+        btn.textContent = '📨 שלח בקשה להנהלה';
+    });
 }
 
 // =============================================
 // 🗣️ TRASH TALK
 // =============================================
-async function loadTrashTalks() {
-    try {
-        const data = await dbSelect('trash_talks');
+function loadTrashTalks() {
+    dbSelect('trash_talks').then(function(data) {
         renderTrashTalk(data || []);
-    } catch (e) {
-        console.error('Error:', e);
-        document.getElementById('trashtalkFeed').innerHTML = '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינה</p></div>';
-    }
+    }).catch(function(e) {
+        console.error('Error loading trash talks:', e);
+        document.getElementById('trashtalkFeed').innerHTML =
+            '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינה - בדקו חיבור</p></div>';
+    });
 }
 
 function renderTrashTalk(talks) {
-    const feed = document.getElementById('trashtalkFeed');
-    if (!talks.length) { feed.innerHTML = '<div class="empty-state"><div class="empty-emoji">🦗</div><p>שקט פה... תהיו הראשונים!</p></div>'; return; }
-    feed.innerHTML = talks.map(tt => {
-        const d = new Date(tt.created_at);
-        const t = d.toLocaleString('he-IL', { day:'numeric', month:'numeric', hour:'2-digit', minute:'2-digit' });
-        return `<div class="trashtalk-item">
-            <div class="trashtalk-item-header">
-                <span class="trashtalk-author">🎤 ${esc(tt.name)}</span>
-                <span class="trashtalk-time">${t}</span>
-            </div>
-            <div class="trashtalk-text">${esc(tt.message)}</div>
-            ${tt.target ? `<div class="trashtalk-target">🎯 מכוון ל: ${esc(tt.target)}</div>` : ''}
-        </div>`;
-    }).join('');
+    var feed = document.getElementById('trashtalkFeed');
+    if (!talks || talks.length === 0) {
+        feed.innerHTML = '<div class="empty-state"><div class="empty-emoji">🦗</div><p>שקט פה... תהיו הראשונים לירות טראש טוק!</p></div>';
+        return;
+    }
+    var html = '<div class="feed-count">🔥 ' + talks.length + ' טראש טוקים עד עכשיו</div>';
+    for (var i = 0; i < talks.length; i++) {
+        var tt = talks[i];
+        html += '<div class="feed-item tt">' +
+            '<div class="feed-item-header">' +
+                '<span class="feed-author">🎤 ' + esc(tt.name) + '</span>' +
+                '<span class="feed-time">' + formatTime(tt.created_at) + '</span>' +
+            '</div>' +
+            '<div class="feed-text">' + esc(tt.message) + '</div>' +
+            (tt.target ? '<div class="feed-target">🎯 מכוון ל: ' + esc(tt.target) + '</div>' : '') +
+        '</div>';
+    }
+    feed.innerHTML = html;
 }
 
-async function postTrashTalk() {
-    const name = document.getElementById('ttName').value.trim();
-    const target = document.getElementById('ttTarget').value;
-    const message = document.getElementById('ttMessage').value.trim();
-    const btn = document.getElementById('ttSubmitBtn');
-    if (!name) { showToast('❌ מה השם שלך?!'); return; }
-    if (!message) { showToast('❌ כתוב משהו מעניין...'); return; }
-    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span> שולח...';
-    try {
-        await dbInsert('trash_talks', { name, target, message });
+function postTrashTalk() {
+    var name = document.getElementById('ttName').value.trim();
+    var target = document.getElementById('ttTarget').value;
+    var message = document.getElementById('ttMessage').value.trim();
+    var btn = document.getElementById('ttSubmitBtn');
+
+    if (!name) {
+        showToast('❌ מה השם שלך?!');
+        return;
+    }
+    if (!message) {
+        showToast('❌ כתוב משהו מעניין לפחות...');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> שולח...';
+
+    dbInsert('trash_talks', {
+        name: name,
+        target: target,
+        message: message
+    }).then(function() {
         document.getElementById('ttMessage').value = '';
         document.getElementById('ttTarget').value = '';
         localStorage.setItem('padelUserName', name);
         showToast('💣 טראש טוק נשלח!');
-        await loadTrashTalks();
-    } catch (e) { console.error(e); showToast('❌ שגיאה - נסה שוב'); }
-    btn.disabled = false; btn.textContent = '💣 שגר טראש טוק';
+        return loadTrashTalks();
+    }).catch(function(e) {
+        console.error('Error posting trash talk:', e);
+        showToast('❌ שגיאה בשליחה - נסה שוב');
+    }).finally(function() {
+        btn.disabled = false;
+        btn.textContent = '💣 שגר טראש טוק';
+    });
 }
 
 // =============================================
 // 🎬 VIDEOS
 // =============================================
-async function loadVideos() {
-    try {
-        const data = await dbSelect('videos');
+function loadVideos() {
+    dbSelect('videos').then(function(data) {
         renderVideos(data || []);
-    } catch (e) {
-        console.error('Error:', e);
-        document.getElementById('videosGrid').innerHTML = '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה</p></div>';
-    }
+    }).catch(function(e) {
+        console.error('Error loading videos:', e);
+        document.getElementById('videosGrid').innerHTML =
+            '<div class="empty-state"><div class="empty-emoji">⚠️</div><p>שגיאה בטעינת סרטונים</p></div>';
+    });
 }
 
 function renderVideos(vids) {
-    const grid = document.getElementById('videosGrid');
-    if (!vids.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-emoji">🎬</div><p>עדיין אין סרטונים - תהיו הראשונים!</p></div>'; return; }
-    grid.innerHTML = vids.map(v => {
-        const d = new Date(v.created_at);
-        const t = d.toLocaleString('he-IL', { day:'numeric', month:'numeric', hour:'2-digit', minute:'2-digit' });
-        return `<div class="video-card">
-            <video controls preload="metadata"><source src="${v.video_url}"></video>
-            <div class="video-card-info">
-                <div class="v-team">🏓 ${esc(v.team)}</div>
-                <div style="font-size:14px;color:rgba(255,255,255,0.6);margin:4px 0;">${esc(v.description||'')}</div>
-                <div class="v-date">📅 ${t} | 👤 ${esc(v.uploaded_by||'')}</div>
-            </div>
-        </div>`;
-    }).join('');
+    var grid = document.getElementById('videosGrid');
+    if (!vids || vids.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-emoji">🎬</div><p>עדיין אין סרטונים - תהיו הראשונים!</p></div>';
+        return;
+    }
+    var html = '';
+    for (var i = 0; i < vids.length; i++) {
+        var v = vids[i];
+        html += '<div class="video-card">' +
+            '<video controls preload="metadata"><source src="' + v.video_url + '"></video>' +
+            '<div class="video-card-info">' +
+                '<div class="v-team">🏓 ' + esc(v.team) + '</div>' +
+                '<div style="font-size:14px;color:rgba(255,255,255,0.6);margin:4px 0;">' + esc(v.description || '') + '</div>' +
+                '<div class="v-date">📅 ' + formatTime(v.created_at) + ' | 👤 ' + esc(v.uploaded_by || '') + '</div>' +
+            '</div>' +
+        '</div>';
+    }
+    grid.innerHTML = html;
 }
 
-async function handleVideoUpload(event) {
-    const file = event.target.files[0];
+function handleVideoUpload(event) {
+    var file = event.target.files[0];
     if (!file) return;
-    const team = document.getElementById('videoTeamSelect').value;
-    const desc = document.getElementById('videoDescription').value.trim();
-    if (!team) { showToast('❌ בחרו זוג!'); event.target.value=''; return; }
-    if (file.size > 50*1024*1024) { showToast('❌ מקס 50MB'); event.target.value=''; return; }
-    const progress = document.getElementById('uploadProgress');
-    const bar = document.getElementById('uploadProgressBar');
-    progress.style.display='block'; bar.style.width='30%';
-    try {
-        const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
-        bar.style.width='50%';
-        const publicUrl = await storageUpload('videos', fileName, file);
-        bar.style.width='80%';
-        await dbInsert('videos', { team, description: desc||'ללא תיאור', video_url: publicUrl, uploaded_by: localStorage.getItem('padelUserName')||'anonymous' });
-        bar.style.width='100%';
-        showToast('🎬 סרטון הועלה!');
-        await loadVideos();
-    } catch (e) { console.error(e); showToast('❌ שגיאה בהעלאה'); }
-    setTimeout(() => { progress.style.display='none'; bar.style.width='0%'; }, 1000);
-    event.target.value=''; document.getElementById('videoDescription').value='';
-}
+    var team = document.getElementById('videoTeamSelect').value;
+    var desc = document.getElementById('videoDescription').value.trim();
+    if (!team) { showToast('❌ בחרו זוג!'); event.target.value = ''; return; }
+    if (file.size > 50 * 1024 * 1024) { showToast('❌ מקס 50MB'); event.target.value = ''; return; }
 
-// =============================================
-// 🛠️ UTILS
-// =============================================
-function esc(text) { if (!text) return ''; const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
-function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+    var progress = document.getElementById('uploadProgress');
+    var bar = document.getElementById('uploadProgressBar');
+    progress.style.display = 'block';
+    bar.style.width = '30%';
+
+    var fileName = Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9.]/g, '_');
+    bar.style.width = '50%';
+
+    storageUpload('videos', fileName, file).then(function(publicUrl) {
+        bar.style.width = '80%';
+        return dbInsert('videos', {
+            team: team,
+            description: desc || 'ללא תיאור',
+            video_url: publicUrl,
+            uploaded_by: localStorage.getItem('padelUserName') || 'anonymous'
+        });
+    }).then(function() {
+        bar.style.width = '100%';
+        showToast('🎬 סרטון הועלה!');
+        return loadVideos();
+    }).catch(function(e) {
+        console.error('Upload error:', e);
+        showToast('❌ שגיאה בהעלאה');
+    }).finally(function() {
+        setTimeout(function() {
+            progress.style.display = 'none';
+            bar.style.width = '0%';
+        }, 1000);
+        event.target.value = '';
+        document.getElementById('videoDescription').value = '';
+    });
+}
 
 // =============================================
 // 📜 NAV & SCROLL
 // =============================================
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function() {
     document.getElementById('navbar').classList.toggle('visible', window.scrollY > 300);
     document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 600);
 });
-document.querySelectorAll('.nav a').forEach(link => {
-    link.addEventListener('click', e => { e.preventDefault(); document.querySelector(link.getAttribute('href'))?.scrollIntoView({ behavior:'smooth' }); });
-});
-document.getElementById('ttMessage').addEventListener('keydown', e => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); postTrashTalk(); } });
 
-// Sync voter name across inputs
-document.getElementById('voterName').addEventListener('input', e => {
-    document.getElementById('ttName').value = e.target.value;
-    localStorage.setItem('padelUserName', e.target.value);
+var navLinks = document.querySelectorAll('.nav a');
+for (var i = 0; i < navLinks.length; i++) {
+    navLinks[i].addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+}
+
+// Enter to submit trash talk
+document.getElementById('ttMessage').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); postTrashTalk(); }
+});
+
+// Enter to submit request
+document.getElementById('reqMessage').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); postRequest(); }
+});
+
+// Sync names across forms
+document.getElementById('reqName').addEventListener('input', function() {
+    document.getElementById('ttName').value = this.value;
+    localStorage.setItem('padelUserName', this.value);
+});
+document.getElementById('ttName').addEventListener('input', function() {
+    document.getElementById('reqName').value = this.value;
+    localStorage.setItem('padelUserName', this.value);
 });
 
 // Load saved name
-const savedName = localStorage.getItem('padelUserName') || '';
-document.getElementById('voterName').value = savedName;
+var savedName = localStorage.getItem('padelUserName') || '';
+document.getElementById('reqName').value = savedName;
 document.getElementById('ttName').value = savedName;
 
 // =============================================
-// 🚀 INIT
+// 🚀 LOAD EVERYTHING
 // =============================================
-buildVotingUI();
-loadVotes();
+loadRequests();
 loadTrashTalks();
 loadVideos();
 
 // Auto refresh every 10 seconds
-setInterval(() => { loadVotes(); loadTrashTalks(); loadVideos(); }, 10000);
+setInterval(function() {
+    loadRequests();
+    loadTrashTalks();
+    loadVideos();
+}, 10000);
+
+console.log('🏓 Padel Shabbat loaded! Supabase URL:', SUPABASE_URL);
 </script>
 
 </body>
